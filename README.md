@@ -14,7 +14,7 @@ linebot + heroku  with node.js
 * 使用終端或命令行應用程序登錄到 Heroku
     
 ```
-   heroku login 
+heroku login 
 ```
 
 初始化 git
