@@ -13,9 +13,9 @@ linebot + heroku  with node.js
 * 開啟剛剛下載的範例程式碼資料夾，在路徑上輸入 cmd
 * 使用終端或命令行應用程序登錄到 Heroku
     
-   `"
-    heroku login
-   "`
+   ```
+   heroku login
+   ```
 
 初始化 git
 
