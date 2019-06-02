@@ -43,7 +43,15 @@ bot.on('message', function (event) {
 				
 			});
 		});
-	}	
+	}else{
+		var replyMsg = 'Hello';
+		event.reply(replyMsg).then(function (data) {
+		
+			}).catch(function (error) {
+				
+			});
+		
+	}
 });
 
 bot.listen('/callback', process.env.PORT || 3000, function () {
