@@ -193,13 +193,27 @@ bot.on('message', function (event) {
 		
 	}else if(userMsg == '新埔飲料') {	
 		var d = new Dictionary(),i,keyValuePair;
-		var replyMsg = '你要的新埔飲料為 :　';
+		d.Add('50嵐');
+		d.Add('一芳');
+		d.Add('露易莎');
+		d.Add('茶湯會');
+		d.Add('7-11');
+		d.Add('全家');
+		d.Add('多喝水才健康唷!!!!!');
+		var random = Math.floor((Math.random() * d.Count()));
+		keyValuePair = d.KeyValuePairs()[random]
+		var replyMsg = '你要的新埔飲料為 :　'+keyValuePair.Key;
 		event.reply(replyMsg).then(function (data) {
 			}).catch(function (error) {
 		});
 	}else if(userMsg == '多多') {	
 		
 		var replyMsg = '我就是一隻最可愛的貓~~喵嗚~記得要給我魚罐罐唷　';
+		event.reply(replyMsg).then(function (data) {
+			}).catch(function (error) {
+		});	
+	}else if(userMsg == '綠茶') {	
+		var replyMsg = '請不要跟我提這兩個字 喵!!!!　';
 		event.reply(replyMsg).then(function (data) {
 			}).catch(function (error) {
 		});	
