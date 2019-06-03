@@ -117,6 +117,31 @@ bot.on('message', function (event) {
 				
 			});
 		});
+	}else if(userMsg == '台北') {
+		url = 'https://www.cwb.gov.tw/V7/forecast/taiwan/Taipei_City.htm';
+		request(url, (err, res, body) => {
+			const $ = cheerio.load(body);
+			let weathers = []
+			$('#box8 .FcstBoxTable01 tbody tr').each(function(i, elem) {
+				weathers.push($(this).text().split('\n'))
+			})
+			var output = weathers[0][1].substring(2).split(' ')[0]+'，溫度大約'+weathers[0][2].substring(2)+'度，降雨機率 '+weathers[0][6].substring(2)+'\n'+
+						weathers[1][1].substring(2).split(' ')[0]+'，溫度大約'+weathers[1][2].substring(2)+'度，降雨機率 '+weathers[1][6].substring(2)+'\n'+
+						weathers[2][1].substring(2).split(' ')[0]+'，溫度大約'+weathers[2][2].substring(2)+'度，降雨機率 '+weathers[2][6].substring(2);
+			/*weathers = weathers.map(weather => ({
+				time: weather[1].substring(2).split(' ')[0],
+				temp: weather[2].substring(2),
+				rain: weather[6].substring(2),
+			}))*/
+			//console.log(weathers{0});
+			console.log(output);
+			var weather ='test';
+			event.reply(output).then(function (data) {
+		
+			}).catch(function (error) {
+				
+			});
+		});
 	}else if(userMsg == '影片') {
 		url = 'https://www.youtube.com/feed/trending';
 		var videoTitle = [];
@@ -137,9 +162,9 @@ bot.on('message', function (event) {
 			});
 		});
 		
-	}else if(userMsg == '新埔') {
+	}else if(userMsg == '新埔美食') {
 		//Dictionary reference https://stackoverflow.com/questions/18490614/create-new-dictionary-with-javascript
-		var d = new Dictionary(),i,keyValuePair;
+		var d = new Dictionary(),keyValuePair;
 		d.Add('起點','http://kklove0620.pixnet.net/blog/post/465873836-%E3%80%90%E6%8D%B7%E9%81%8B%E6%96%B0%E5%9F%94%E7%AB%99%E3%80%91begin-again-%E8%B5%B7%E9%BB%9Ecafe-%EF%B8%B3%E6%95%A3%E7%99%BC%E9%9D%92%E6%98%A5');
 		d.Add('向陽','https://www.flickr.com/photos/110399388@N06/19627397893');
 		d.Add('石二鍋','https://www.12hotpot.com.tw/');
@@ -166,11 +191,25 @@ bot.on('message', function (event) {
 			}).catch(function (error) {
 			});
 		
+	}else if(userMsg == '新埔飲料') {	
+		var d = new Dictionary(),i,keyValuePair;
+		var replyMsg = '你要的新埔飲料為 :　';
+		event.reply(replyMsg).then(function (data) {
+			}).catch(function (error) {
+		});
+	}else if(userMsg == '多多') {	
 		
-	
+		var replyMsg = '我就是一隻最可愛的貓~~喵嗚~記得要給我魚罐罐唷　';
+		event.reply(replyMsg).then(function (data) {
+			}).catch(function (error) {
+		});	
 	}else{//default message
 		
-		var replyMsg = 'Hello 歡迎來到多多小幫手\n'+"下列有幾項功能請輸入關鍵字去做使用\n"+"輸入：新埔　新埔美食推薦\n"+"輸入：天氣　從中央氣象局取得最新天氣報告\n"+"輸入：影片　隨機挑選Youtube精選影片\n";
+		var replyMsg = 'Hello 歡迎來到多多小幫手\n'+"下列有幾項功能請輸入關鍵字去做使用\n"+
+						"輸入：新埔美食　新埔美食推薦\n"+
+						"輸入：天氣　從中央氣象局取得最新天氣報告\n"+
+						"輸入：台北　從中央氣象局取得台北相關天氣\n"+
+						"輸入：影片　隨機挑選Youtube精選影片";
 		event.reply(replyMsg).then(function (data) {
 			}).catch(function (error) {
 			});
