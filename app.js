@@ -1,6 +1,7 @@
 const request = require('request');
 const cheerio = require('cheerio');
 
+
 var linebot = require('linebot');
 
 var bot = linebot({
@@ -201,11 +202,73 @@ bot.on('message', function (event) {
 		d.Add('全家');
 		d.Add('多喝水才健康唷!!!!!');
 		var random = Math.floor((Math.random() * d.Count()));
-		keyValuePair = d.KeyValuePairs()[random]
+		keyValuePair = d.KeyValuePairs()[random];
 		var replyMsg = '你要的新埔飲料為 :　'+keyValuePair.Key;
 		event.reply(replyMsg).then(function (data) {
 			}).catch(function (error) {
 		});
+	}else if(userMsg == '圖片') {	
+
+		url = 'https://www.ptt.cc/bbs/Beauty/index.html';
+		let replyMsg =[];
+		var replyMsgs = '';
+		request(url, (err, res, body) => {
+			const $ = cheerio.load(body);
+			var titles = $(".title a");
+			let paths = [];
+			for(var i=0;i<titles.length;i++) {
+				var path = "https://www.ptt.cc" + $(titles[i]).attr("href");
+
+				//var getMsg = $('#main-container .attr("href")').text();
+				paths.push(path);
+				
+			}
+			//console.log('paths '+paths);
+			//for(var i=0;i<2;i++){
+			for(var i=0;i<paths.length;i++){	
+				getImage(paths);
+			}
+			function getImage(paths){
+				request(paths[i], (err, res, body) => {
+					const $ = cheerio.load(body);
+					
+					var images = body.match(/imgur.com\/[0-9a-zA-Z]{7}/g);
+					//console.log(images);
+				
+					images = [ ...new Set(images) ];
+					//console.log('images '+images);
+					for (j = 0; j < images.length; j++){
+						//replyMsg = [ ...new Set('https://i.'+images[j])];
+						replyMsg.push('https://i.'+images[j]);
+						//console.log(replyMsg);
+				
+					}	
+					//console.log('replyMsg '+replyMsg );
+					/*for(var i=0;i<replyMsg.length;i++){
+						replyMsgs = replyMsgs+replyMsg[i]+'\n';
+					}*/
+					var random = Math.floor((Math.random() * replyMsg.length));
+					event.reply(replyMsg[random]).then(function (data) {
+					}).catch(function (error) {
+					});
+				});
+				
+			
+				
+
+				//console.log(i);
+			}
+			//console.log(replyMsg);
+			
+			//console.log(replyMsgs);
+			
+		});
+		
+		
+		
+			
+		
+			
 	}else if(userMsg == '多多') {	
 		
 		var replyMsg = '我就是一隻最可愛的貓~~喵嗚~記得要給我魚罐罐唷　';
@@ -217,13 +280,18 @@ bot.on('message', function (event) {
 		event.reply(replyMsg).then(function (data) {
 			}).catch(function (error) {
 		});	
+
 	}else{//default message
 		
-		var replyMsg = 'Hello 歡迎來到多多小幫手\n'+"下列有幾項功能請輸入關鍵字去做使用\n"+
-						"輸入：新埔美食　新埔美食推薦\n"+
-						"輸入：天氣　從中央氣象局取得最新天氣報告\n"+
-						"輸入：台北　從中央氣象局取得台北相關天氣\n"+
-						"輸入：影片　隨機挑選Youtube精選影片";
+		var replyMsg = 'Hello 歡迎來到多多小幫手\n'+'下列有幾項功能請輸入關鍵字去做使用\n'+
+						'輸入：新埔美食　新埔美食推薦\n'+
+						'輸入：天氣　從中央氣象局取得最新天氣報告\n'+
+						'輸入：台北　從中央氣象局取得台北相關天氣\n'+
+						'輸入：影片　隨機挑選Youtube精選影片\n'+
+						'輸入: 圖片  從表特版第一頁照片中全部中隨機挑選一張'
+						
+						
+						;
 		event.reply(replyMsg).then(function (data) {
 			}).catch(function (error) {
 			});
