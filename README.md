@@ -7,6 +7,8 @@ linebot + heroku  with node.js
   * 連結heroku
   * 小東西==>製作一個隨機網頁
 # 連結line bot
+這個部份我挑重點說明
+* 對於在webhooks URL的地方的網址一定要填好=>填完完成後會呈現sucess才行
 # 連結heroku
 這個地方是大家很容易被搞崩的地方
 * 下載並安裝 Heroku CLI、Git
