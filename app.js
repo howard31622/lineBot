@@ -143,6 +143,12 @@ bot.on('message', function (event) {
 				
 			});
 		});
+	}else if(userMsg == 'CNN') {	
+		event.reply("https://edition.cnn.com/cnn10").then(function (data) {
+		
+			}).catch(function (error) {
+				
+			});	
 	}else if(userMsg == '影片') {
 		url = 'https://www.youtube.com/feed/trending';
 		var videoTitle = [];
@@ -285,10 +291,12 @@ bot.on('message', function (event) {
 		
 		var replyMsg = 'Hello 歡迎來到多多小幫手\n'+'下列有幾項功能請輸入關鍵字去做使用\n'+
 						'輸入：新埔美食　新埔美食推薦\n'+
+						'輸入：新埔飲料  新埔飲料推薦\n'+
+						'輸入：CNN 從CNN取得影片\n'+
 						'輸入：天氣　從中央氣象局取得最新天氣報告\n'+
 						'輸入：台北　從中央氣象局取得台北相關天氣\n'+
 						'輸入：影片　隨機挑選Youtube精選影片\n'+
-						'輸入: 圖片  從表特版第一頁照片中全部中隨機挑選一張'
+						'輸入：圖片  從表特版第一頁貼文裡的全部照片隨機挑選一張'
 						
 						
 						;
